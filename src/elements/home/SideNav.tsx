@@ -9,16 +9,20 @@ import {
   Bus,
 } from "tabler-icons-react";
 import { ThemeIcon, UnstyledButton, Group, Text } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 interface MainLinkProps {
   icon: React.ReactNode;
   color: string;
   label: string;
+  href: string;
 }
 
-function MainLink({ icon, color, label }: MainLinkProps) {
+function MainLink({ icon, color, label, href }: MainLinkProps) {
   return (
     <UnstyledButton
+      component={Link}
+      to={href}
       sx={(theme) => ({
         display: "block",
         width: "100%",
@@ -47,9 +51,14 @@ function MainLink({ icon, color, label }: MainLinkProps) {
 }
 
 const data = [
-  { icon: <Home size={22} />, color: "blue", label: "Home" },
-  { icon: <Bus size={22} />, color: "teal", label: "Rotas" },
-  { icon: <Blockquote size={22} />, color: "violet", label: "Créditos" },
+  { icon: <Home size={22} />, color: "blue", label: "Home", href: "/" },
+  { icon: <Bus size={22} />, color: "teal", label: "Rotas", href: "/rotas" },
+  {
+    icon: <Blockquote size={22} />,
+    color: "violet",
+    label: "Créditos",
+    href: "/",
+  },
 ];
 
 export function SideNav() {

@@ -25,6 +25,7 @@ type BusCardProps = {
   number?: string;
   showIcon: BusCardIcon;
   Style?: React.CSSProperties;
+  screenW?: number; //makes the card smaller
 };
 
 export default function BusCard({
@@ -34,6 +35,7 @@ export default function BusCard({
   number,
   showIcon,
   Style,
+  screenW,
 }: BusCardProps) {
   const theme = useMantineTheme();
 
@@ -66,7 +68,12 @@ export default function BusCard({
             <IconElement />
             <Text weight={500}>{title}</Text>
           </Group>
-          <Group spacing="sm">
+          <Group
+            spacing={(screenW ?? 1700) < 985 ? 2 : "sm"}
+            style={{
+              display: (screenW ?? 1700) < 939 ? "none" : "inline",
+            }}
+          >
             {hours?.map((x) => {
               return (
                 <Badge color="green" variant="light">
@@ -84,7 +91,7 @@ export default function BusCard({
 
         <Group>
           <div style={{ display: "flex" }}>
-            <TelegramButton />
+            <TelegramButton short={(screenW ?? 1701) <= 1700} />
             <Button
               variant="light"
               color="blue"
@@ -100,7 +107,11 @@ export default function BusCard({
   );
 }
 
-function TelegramButton() {
+interface TelegramButtonProp {
+  short: boolean;
+}
+
+function TelegramButton({ short }: TelegramButtonProp) {
   return (
     <Button
       component="a"
@@ -128,7 +139,7 @@ function TelegramButton() {
         },
       })}
     >
-      Entrar no grupo
+      {short ? "Grupo" : "Entrar no grupo"}
     </Button>
   );
 }

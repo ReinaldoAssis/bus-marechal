@@ -90,13 +90,14 @@ export default function Rotas() {
       <Grid>
         {cards.map((x) => {
           return (
-            <Grid.Col span={4}>
+            <Grid.Col span={6}>
               <BusCard
                 title={x.title}
                 hours={x.hours}
                 showIcon={x.showIcon}
                 number={x.number}
                 Style={x.Style}
+                screenW={WIDTH}
               />
             </Grid.Col>
           );

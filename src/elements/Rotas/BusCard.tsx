@@ -69,14 +69,17 @@ export default function BusCard({
             <Text weight={500}>{title}</Text>
           </Group>
           <Group
-            spacing={(screenW ?? 1700) < 985 ? 2 : "sm"}
             style={{
               display: (screenW ?? 1700) < 939 ? "none" : "inline",
             }}
           >
             {hours?.map((x) => {
               return (
-                <Badge color="green" variant="light">
+                <Badge
+                  color="green"
+                  variant="light"
+                  style={{ marginLeft: (screenW ?? 1700) < 985 ? 1 : 8 }}
+                >
                   {x}
                 </Badge>
               );

@@ -20,15 +20,7 @@ import { SideNav } from "./elements/home/SideNav";
 import Rotas from "./elements/Rotas/Rotas";
 import LiveMap from "./elements/Rotas/LiveMap";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-
-function Home() {
-  return (
-    <>
-      <label>hey there</label>
-      {/* <LiveMap height={400} width={600} /> */}
-    </>
-  );
-}
+import Home from "./elements/home/Home";
 
 function App() {
   const theme = useMantineTheme();

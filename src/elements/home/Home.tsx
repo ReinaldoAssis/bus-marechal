@@ -1,13 +1,42 @@
-import { Grid, Text, Title, useMantineTheme } from "@mantine/core";
+import {
+  Container,
+  Grid,
+  MediaQuery,
+  SimpleGrid,
+  Skeleton,
+  Text,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
+import { useEffect, useState } from "react";
+import NewsCard from "./NewsCard";
+
+const PRIMARY_COL_HEIGHT = 300;
 
 export default function Home() {
+  const theme = useMantineTheme();
+  const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
+
+  const [WIDTH, setWidth] = useState(window.innerWidth);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  });
+
   return (
     <>
-      <Grid>
-        <Grid.Col>
-          <Title order={2}>Notícias</Title>
-        </Grid.Col>
-      </Grid>
+      <Title order={2}>Notícias</Title>
+      <div className="homediv">
+        <NewsCard
+          Style={{ marginRight: WIDTH >= 1000 ? 25 : "auto", marginBottom: 20 }}
+        />
+        <NewsCard Style={{ marginBottom: 20 }} />
+      </div>
       <div
         style={{
           position: "absolute",

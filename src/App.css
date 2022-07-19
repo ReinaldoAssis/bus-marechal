@@ -2,6 +2,16 @@
   height: 400;
 } */
 
+.homediv {
+  margin-top: 20px;
+}
+
+@media (min-width: 1000px) {
+  .homediv {
+    display: inline-flex;
+  }
+}
+
 .App {
   text-align: center;
 }

@@ -16,13 +16,15 @@ interface MainLinkProps {
   color: string;
   label: string;
   href: string;
+  setOpened: Function;
 }
 
-function MainLink({ icon, color, label, href }: MainLinkProps) {
+function MainLink({ icon, color, label, href, setOpened }: MainLinkProps) {
   return (
     <UnstyledButton
       component={Link}
       to={href}
+      onClick={() => setOpened(false)}
       sx={(theme) => ({
         display: "block",
         width: "100%",
@@ -61,7 +63,13 @@ const data = [
   },
 ];
 
-export function SideNav() {
-  const links = data.map((link) => <MainLink {...link} key={link.label} />);
+interface SideNavProps {
+  setOpened: Function;
+}
+
+export function SideNav({ setOpened }: SideNavProps) {
+  const links = data.map((link) => (
+    <MainLink setOpened={setOpened} {...link} key={link.label} />
+  ));
   return <div>{links}</div>;
 }

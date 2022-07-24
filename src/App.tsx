@@ -47,7 +47,7 @@ function App() {
             width={{ sm: 200, lg: 300 }}
           >
             {/* <Text>Application navbar</Text> */}
-            <SideNav />
+            <SideNav setOpened={setOpened} />
           </Navbar>
         }
         header={

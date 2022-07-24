@@ -21,6 +21,7 @@ import Rotas from "./elements/Rotas/Rotas";
 import LiveMap from "./elements/Rotas/LiveMap";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import Home from "./elements/home/Home";
+import ViewRoute from "./elements/Rotas/ViewRoute/ViewRoute";
 
 function App() {
   const theme = useMantineTheme();
@@ -73,6 +74,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/rotas" element={<Rotas />} />
+          <Route path="/bus/:id_arg" element={<ViewRoute />} />
         </Routes>
       </AppShell>
     </Router>

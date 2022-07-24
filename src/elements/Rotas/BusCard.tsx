@@ -11,6 +11,7 @@ import {
   Title,
   MANTINE_SIZES,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { BrandTelegram, Bus } from "tabler-icons-react";
 
 export enum BusCardIcon {
@@ -18,7 +19,7 @@ export enum BusCardIcon {
   ShowNumber,
 }
 
-type BusCardProps = {
+export type BusCardProps = {
   title?: string;
   hours?: string[];
   telegram_link?: string;
@@ -26,6 +27,7 @@ type BusCardProps = {
   showIcon: BusCardIcon;
   Style?: React.CSSProperties;
   screenW?: number; //makes the card smaller
+  id?: number; //usado no ViewRoute component
 };
 
 export default function BusCard({
@@ -36,6 +38,7 @@ export default function BusCard({
   showIcon,
   Style,
   screenW,
+  id,
 }: BusCardProps) {
   const theme = useMantineTheme();
 
@@ -100,6 +103,8 @@ export default function BusCard({
               color="blue"
               fullWidth
               style={{ marginTop: 14 }}
+              component={Link}
+              to={`/bus/${id}`}
             >
               Ver informações
             </Button>

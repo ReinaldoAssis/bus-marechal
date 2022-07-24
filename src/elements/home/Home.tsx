@@ -39,10 +39,11 @@ export default function Home() {
       </div>
       <div
         style={{
-          position: "absolute",
-          bottom: 10,
-          display: "flex",
+          position: "relative",
+          bottom: 5,
+          display: "block",
           verticalAlign: "center",
+          marginTop: 10,
         }}
       >
         <a

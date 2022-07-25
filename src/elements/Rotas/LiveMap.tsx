@@ -1,6 +1,5 @@
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { busMarker } from "./ViewRoute/Marker";
 import busiconpng from "./ViewRoute/marker.png";
 
 /*.leaflet-container {

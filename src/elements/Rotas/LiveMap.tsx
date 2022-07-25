@@ -1,4 +1,7 @@
+import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { busMarker } from "./ViewRoute/Marker";
+import busiconpng from "./ViewRoute/marker.png";
 
 /*.leaflet-container {
   height: 500px;
@@ -12,6 +15,13 @@ type LiveMapProps = {
 };
 
 export default function LiveMap({ height, width, Style }: LiveMapProps) {
+  function get_icon() {
+    return L.icon({
+      iconUrl: busiconpng,
+      iconSize: [30, 30],
+    });
+  }
+
   return (
     <div style={{ height: height, width: width, ...Style }}>
       <MapContainer
@@ -24,7 +34,7 @@ export default function LiveMap({ height, width, Style }: LiveMapProps) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        <Marker icon={get_icon()} position={[-9.74299, -35.88232]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>

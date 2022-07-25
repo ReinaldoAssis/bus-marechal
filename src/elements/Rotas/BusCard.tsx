@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { BrandTelegram, Bus } from "tabler-icons-react";
+import TelegramButton from "./TelegramButton";
 
 export enum BusCardIcon {
   ShowIcon,
@@ -97,7 +98,10 @@ export default function BusCard({
 
         <Group>
           <div style={{ display: "flex" }}>
-            <TelegramButton short={(screenW ?? 1701) <= 1700} />
+            <TelegramButton
+              short={(screenW ?? 1701) <= 1700}
+              telegram_link={telegram_link ?? "www.telegram.org"}
+            />
             <Button
               variant="light"
               color="blue"
@@ -112,42 +116,5 @@ export default function BusCard({
         </Group>
       </Card>
     </Container>
-  );
-}
-
-interface TelegramButtonProp {
-  short: boolean;
-}
-
-function TelegramButton({ short }: TelegramButtonProp) {
-  return (
-    <Button
-      component="a"
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://www.telegram.org/"
-      leftIcon={<BrandTelegram size={18} />}
-      styles={(theme) => ({
-        root: {
-          backgroundColor: "#00acee",
-          border: 0,
-          height: 35,
-          marginRight: 10,
-          marginTop: 14,
-          paddingLeft: 20,
-          paddingRight: 20,
-
-          "&:hover": {
-            backgroundColor: theme.fn.darken("#00acee", 0.05),
-          },
-        },
-
-        leftIcon: {
-          marginRight: 15,
-        },
-      })}
-    >
-      {short ? "Grupo" : "Entrar no grupo"}
-    </Button>
   );
 }

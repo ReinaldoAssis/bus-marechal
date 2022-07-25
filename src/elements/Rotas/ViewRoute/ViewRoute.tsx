@@ -4,6 +4,7 @@ import { BusCardIcon, BusCardProps } from "../BusCard";
 
 import { routes } from "../Data";
 import LiveMap from "../LiveMap";
+import TelegramButton from "../TelegramButton";
 
 export default function ViewRoute() {
   const { id_arg } = useParams();
@@ -20,6 +21,7 @@ export default function ViewRoute() {
         <Title order={2} style={{ marginRight: 30 }}>
           {data.title}
         </Title>
+
         <Group>
           {data.hours?.map((x) => {
             return (
@@ -30,6 +32,10 @@ export default function ViewRoute() {
           })}
         </Group>
       </div>
+      <TelegramButton
+        short={false}
+        telegram_link={data.telegram_link ?? "www.telegram.org"}
+      />
       <LiveMap Style={{ height: "80%", width: "100%", marginTop: 20 }} />
     </>
   );

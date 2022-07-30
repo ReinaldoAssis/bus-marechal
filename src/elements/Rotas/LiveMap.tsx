@@ -7,13 +7,24 @@ import busiconpng from "./ViewRoute/marker.png";
   width: 600px;
 } */
 
+export type LiveMapMarkerProps = {
+  lat?: number;
+  long?: number;
+};
+
 type LiveMapProps = {
   height?: number;
   width?: number;
   Style?: React.CSSProperties;
+  marker?: LiveMapMarkerProps;
 };
 
-export default function LiveMap({ height, width, Style }: LiveMapProps) {
+export default function LiveMap({
+  height,
+  width,
+  Style,
+  marker,
+}: LiveMapProps) {
   function get_icon() {
     return L.icon({
       iconUrl: busiconpng,
@@ -33,7 +44,10 @@ export default function LiveMap({ height, width, Style }: LiveMapProps) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker icon={get_icon()} position={[-9.74299, -35.88232]}>
+        <Marker
+          icon={get_icon()}
+          position={[marker?.lat ?? 0, marker?.long ?? 0]}
+        >
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>

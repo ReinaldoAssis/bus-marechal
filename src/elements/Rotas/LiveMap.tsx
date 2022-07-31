@@ -17,6 +17,7 @@ type LiveMapProps = {
   width?: number;
   Style?: React.CSSProperties;
   marker?: LiveMapMarkerProps;
+  center?: Array<number>;
 };
 
 export default function LiveMap({
@@ -24,6 +25,7 @@ export default function LiveMap({
   width,
   Style,
   marker,
+  center = [-9.7229, -35.8683],
 }: LiveMapProps) {
   function get_icon() {
     return L.icon({
@@ -36,7 +38,7 @@ export default function LiveMap({
     <div style={{ height: height, width: width, ...Style }}>
       <MapContainer
         style={{ height: height, width: width, ...Style }}
-        center={[-9.7229, -35.8683]}
+        center={[center[0], center[1]]}
         zoom={13}
         scrollWheelZoom={false}
       >

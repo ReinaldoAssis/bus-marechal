@@ -1,4 +1,4 @@
-import { Badge, Button, Group, Title } from "@mantine/core";
+import { Badge, Button, Group, Text, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BusCardIcon, BusCardProps } from "../BusCard";
@@ -53,7 +53,7 @@ export default function ViewRoute() {
 
   useEffect(() => {
     //console.log(`show log: ${gps?.lat}`);
-    setShow(true);
+    setShow(gps?.lat != undefined);
   }, [gps]);
 
   return (
@@ -82,18 +82,22 @@ export default function ViewRoute() {
         <LiveMap
           Style={{ height: "80%", width: "100%", marginTop: 20 }}
           marker={{ lat: gps?.lat, long: gps?.long }}
+          center={[
+            gps?.lat == undefined ? -9.7229 : gps?.lat,
+            gps?.long == undefined ? -35.8683 : gps?.long,
+          ]}
         />
       ) : (
-        <></>
+        <Text style={{ marginTop: 20 }}>Carregando...</Text>
       )}
 
-      <Button
+      {/* <Button
         onClick={() => {
           console.log(gps);
         }}
       >
         Atualizar
-      </Button>
+      </Button> */}
     </>
   );
 }

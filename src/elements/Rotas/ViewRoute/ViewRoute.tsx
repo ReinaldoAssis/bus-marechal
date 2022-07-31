@@ -1,4 +1,4 @@
-import { Badge, Group, Title } from "@mantine/core";
+import { Badge, Button, Group, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BusCardIcon, BusCardProps } from "../BusCard";
@@ -11,7 +11,13 @@ import TelegramButton from "../TelegramButton";
 export default function ViewRoute() {
   const { id_arg } = useParams();
 
-  const [gps, setGps] = useState();
+  interface IGps {
+    lat: any;
+    long: any;
+  }
+
+  const [gps, setGps] = useState<IGps>();
+  const [show, setShow] = useState(false);
 
   const data: BusCardProps = routes.find((x) => x.id == id_arg) ?? {
     showIcon: BusCardIcon.ShowIcon,
@@ -20,22 +26,35 @@ export default function ViewRoute() {
   };
 
   useEffect(() => {
-    var myHeaders = new Headers();
-    myHeaders.append("X-API-Key", "cM19QLTD.dmFrooK15J6dacHt9Xdj3A-5SQUBwem8i");
+    //console.log(`${process.env.REACT_APP_API_KEY}`);
+    const getData = async () => {
+      var myHeaders = new Headers();
+      myHeaders.append("X-API-Key", `${process.env.REACT_APP_API_KEY}`);
 
-    var requestOptions: RequestInit = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
+      var requestOptions: RequestInit = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+      //console.log(`Api key ${process.env.REACT_APP_API_KEY}`);
+      // fetch("https://77hkg3.deta.dev/bus/24", requestOptions)
+      //   .then((response) => response.json())
+      //   .then((result) => setGps(result))
+      //   .catch((error) => console.log("error", error));
+
+      await fetch("https://77hkg3.deta.dev/bus/24", requestOptions)
+        .then((response) => response.json())
+        .then((result) => setGps({ lat: result.lat, long: result.long }));
+
+      //console.log(gps);
     };
-    //console.log(`Api key ${process.env.REACT_APP_API_KEY}`);
-    fetch("https://77hkg3.deta.dev/bus/24", requestOptions)
-      .then((response) => response.json())
-      .then((result) => setGps(result))
-      .catch((error) => console.log("error", error));
-
-    console.log(gps);
+    getData();
   }, []);
+
+  useEffect(() => {
+    //console.log(`show log: ${gps?.lat}`);
+    setShow(true);
+  }, [gps]);
 
   return (
     <>
@@ -58,10 +77,23 @@ export default function ViewRoute() {
         short={false}
         telegram_link={data.telegram_link ?? "www.telegram.org"}
       />
-      <LiveMap
-        Style={{ height: "80%", width: "100%", marginTop: 20 }}
-        marker={{ lat: 0, long: 0 }}
-      />
+
+      {show == true ? (
+        <LiveMap
+          Style={{ height: "80%", width: "100%", marginTop: 20 }}
+          marker={{ lat: gps?.lat, long: gps?.long }}
+        />
+      ) : (
+        <></>
+      )}
+
+      <Button
+        onClick={() => {
+          console.log(gps);
+        }}
+      >
+        Atualizar
+      </Button>
     </>
   );
 }
